@@ -1,11 +1,27 @@
 'use strict';
+/**
+ * @module Twit
+ *
+ * Collects tweets through the Twitter Stream API
+ * Provides a sorted list of most popular tags
+ */
 
+/**
+ * Module Dependencies
+ */
 var Twit = require('twit');
 var stream;
 var _isStreaming = false;
 
 var hashtags = {};
 
+/**
+ * @private
+ *
+ * Increments or initializes the count for a given tag
+ * @param {Object} tagData - Contains info about the hashtag
+ * @param {String} tagData.text - Name of the tag
+ */
 var _trackHashtag = function(tagData) {
   var tag = tagData.text;
   if(hashtags[tag]) {
@@ -15,6 +31,14 @@ var _trackHashtag = function(tagData) {
   }
 };
 
+/**
+ * @public
+ *
+ * Starts the stream to start collecting tweets
+ *
+ * @param {String} token - OAuth token of user
+ * @param {String} tokenSecret - OAuth secret of user
+ */
 var startStream = function(token, tokenSecret) {
   var twit = new Twit({
     consumer_key: process.env.TWITTER_KEY,
@@ -34,11 +58,25 @@ var startStream = function(token, tokenSecret) {
   });
 };
 
+/**
+ * @public
+ *
+ * Stops the twitter stream
+ */
 var stopStream = function() {
   stream.stop();
   _isStreaming = false;
 };
 
+/**
+ * @public
+ *
+ * Sorts the hashtags by popularity and returns it in array
+ *
+ * @return {Array} Array of tag data array. Each tag is an array
+ * [0] is the name of the array, [1] is the attribute
+ *
+ */
 var getHashtagStats = function() {
   // Sort the hashtags by popularity (count)
   var sortedTags = [];
@@ -56,6 +94,11 @@ var getHashtagStats = function() {
   return sortedTags;
 };
 
+/**
+ * @public
+ *
+ * @return {Boolean} indicates whether twitter API is currently streaming
+ */
 var isStreaming = function() {
   return _isStreaming;
 };

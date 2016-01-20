@@ -15,8 +15,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Disable etag to avoid caching issues while reloading tags
 app.disable('etag');
 
+// Dummy serialize/deserialize functions since we dont have a DB to store
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -25,6 +27,7 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
+// Configure twitter strategy
 passport.use(new TwitterStrategy({
     consumerKey: process.env.TWITTER_KEY,
     consumerSecret: process.env.TWITTER_SECRET,
@@ -43,6 +46,7 @@ passport.use(new TwitterStrategy({
   }
 ));
 
+// Endpoints
 app.get('/', function(req, res) {
   if(!req.user) {
     var response = 'Oops, you are not logged in. Click ' +
