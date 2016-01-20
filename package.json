@@ -1,0 +1,24 @@
+{
+  "name": "tweet-stats",
+  "version": "1.0.0",
+  "description": "Stat collector for tweets",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tolgaek/tweet-stats.git"
+  },
+  "keywords": [
+    "tweet",
+    "twitter",
+    "stats"
+  ],
+  "author": "Tolga Ekmen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tolgaek/tweet-stats/issues"
+  },
+  "homepage": "https://github.com/tolgaek/tweet-stats#readme"
+}
