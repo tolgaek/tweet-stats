@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/tolgaek/tweet-stats/issues"
   },
-  "homepage": "https://github.com/tolgaek/tweet-stats#readme"
+  "homepage": "https://github.com/tolgaek/tweet-stats#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "express-session": "^1.13.0",
+    "passport": "^0.3.2",
+    "passport-twitter": "^1.0.3"
+  }
 }
