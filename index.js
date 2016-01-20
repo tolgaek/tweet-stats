@@ -40,10 +40,15 @@ passport.use(new TwitterStrategy({
 ));
 
 app.get('/', function(req, res) {
-  var response = 'Click <a href="/auth/twitter">here</a> ' +
-                 'to authenticate yourself on Twitter';
+  if(!req.user) {
+    var response = 'Oops, you are not logged in. Click ' +
+                   '<a href="/auth/twitter">here</a> ' +
+                   'to authenticate yourself on Twitter';
 
-  return res.send(response);
+    return res.send(response);
+  }
+
+  return res.send('Hello ' + req.user.name);
 });
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
